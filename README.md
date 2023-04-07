@@ -18,3 +18,20 @@ We implement and evaluate the design on the Xilinx ZCU106 platform. We synthesis
 + The ***SDK*** folder includes the driver code for the FPGA design in the Vitis IDE.  
 
 Currently, two cases are not supported: 1) empty rows exist; 2) the number of partial results exceed 1000. We will support these cases in the future.
+
+For now, benchmarks we use are as follows:
+
+```markdown
+| Benchmark  | Cycles   |
+|------------|----------|
+| poisson3Da | 16638816 |
+| raefsky1   | 25658832 |
+| crystk01   | 20202582 |
+| s3rmt3m3   | 8411161  |
+| t2dah_a    | 5354111  |
+| nasa2910   | 11731798 |
+| bcsstk24   | 7354144  |
+| cavity26   | 6012791  |
+| ex9        | 3790519  |
+| af23560    | 13979280 |
+```
