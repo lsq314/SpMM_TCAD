@@ -11,7 +11,7 @@ This work is licensed under a
 [cc-by-nc-sa-image]: https://licensebuttons.net/l/by-nc-sa/4.0/88x31.png
 [cc-by-nc-sa-shield]: https://img.shields.io/badge/License-CC%20BY--NC--SA%204.0-lightgrey.svg
 
-We implement and evaluate the design on the Xilinx ZCU106 platform. We synthesis and generate the bitstream using the Xilinx Vitis toolchain v2022.1.
+We implement and evaluate the design on the Xilinx ZCU106 platform under 100MHz. We synthesis and generate the bitstream using the Xilinx Vitis toolchain v2022.1.
 
 + The ***Preprocessing*** includes the python code of converting .mtx file to binaries.
 + The ***HLS*** folder includes the source code of SpMM design. 
