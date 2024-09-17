@@ -197,8 +197,12 @@ void two_merger(merge_stream* from1, merge_stream* from2, id_t len1, id_t *len2_
 		merge_stream* result1, id_t* length1){
 
 #pragma HLS DATAFLOW disable_start_propagation
-	_merge_temp(from1, from2, len1, len2_t, result, length);
-	_merge_temp(from11, from21, len11, len2_t1, result1, length1);
+
+	merge_stream temp_fifo;
+#pragma HLS stream variable=temp_fifo depth=4
+
+	_merge_temp(from1, from2, len1, len2_t, &temp_fifo, length);
+	_merge_temp(&temp_fifo, from21, len11, len2_t1, result1, length1);
 }
 
 void merge_two_sub(mcontrolr_stream* control_s, merge_stream* result, merge_stream* from, bool_stream* efinish){
@@ -250,13 +254,13 @@ void merge_two_sub(mcontrolr_stream* control_s, merge_stream* result, merge_stre
 				if (temp_cr.whether_push) {
 
 					if (f_minimum_index == 0) {
-						two_merger(&pong, &ping1, pong_len, &ping1_len, &ping, &ping_len, &pong1, &ping, pong1_len, &ping_len, result, &curr_iter);
+						two_merger(&pong, &ping1, pong_len, &ping1_len, &ping, &ping_len, &ping, &pong1, pong1_len, &ping_len, result, &curr_iter);
 					} else if (f_minimum_index == 1) {
 						two_merger(&ping, &ping1, ping_len, &ping1_len, &pong, &pong_len, &pong, &pong1, pong_len, &pong1_len, result, &curr_iter);
 					} else if (f_minimum_index == 2) {
 						two_merger(&ping, &pong, ping_len, &pong_len, &ping1, &ping1_len, &ping1, &pong1, ping1_len, &pong1_len, result, &curr_iter);
 					} else if (f_minimum_index == 3) {
-						two_merger(&ping, &ping1, ping_len, &ping1_len, &pong1, &pong1_len, &pong, &pong1, pong_len, &pong1_len, result, &curr_iter);
+						two_merger(&ping, &ping1, ping_len, &ping1_len, &pong1, &pong1_len, &pong1, &pong, pong_len, &pong1_len, result, &curr_iter);
 					}
 
 					temp_mi.end = true;
